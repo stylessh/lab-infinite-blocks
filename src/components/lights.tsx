@@ -1,4 +1,16 @@
+import { useFrame } from "@react-three/fiber";
+import { useRef } from "react";
+import * as THREE from "three";
+
 const Lights = () => {
+  const pointLightRef = useRef<THREE.PointLight>(null);
+
+  useFrame(({ pointer }) => {
+    if (!pointLightRef.current) return;
+
+    pointLightRef.current.position.set(pointer.x, -1.5, -pointer.y * 1.5);
+  });
+
   return (
     <>
       <hemisphereLight intensity={0.1} color={"red"} />
@@ -11,6 +23,13 @@ const Lights = () => {
         intensity={1}
         castShadow
         shadow-mapSize={2048}
+      />
+
+      <pointLight
+        position={[5, -1.5, 5]}
+        intensity={2.5}
+        color={"red"}
+        ref={pointLightRef}
       />
     </>
   );

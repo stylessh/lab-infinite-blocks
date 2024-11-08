@@ -6,7 +6,7 @@ interface BoxProps {
   isWireframe?: boolean;
 }
 
-const Box = ({ position, isWireframe = false }: BoxProps) => {
+const Box = ({ position }: BoxProps) => {
   const ref = useRef<THREE.InstancedMesh>(null);
 
   useLayoutEffect(() => {
@@ -23,12 +23,7 @@ const Box = ({ position, isWireframe = false }: BoxProps) => {
       receiveShadow
     >
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial
-        color="gray"
-        wireframe={isWireframe}
-        opacity={isWireframe ? 0.5 : 1}
-        transparent={isWireframe}
-      />
+      <meshStandardMaterial color="#998b8a" />
     </instancedMesh>
   );
 };

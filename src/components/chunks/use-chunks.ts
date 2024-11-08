@@ -30,7 +30,7 @@ export const getMovementAmount = (speed: number, delta: number) =>
 
 const initialChunks = Array.from({ length: TOTAL_CHUNKS }, () => getNewChunk());
 
-export const DEFAULT_SPEED = 0.0005;
+export const DEFAULT_SPEED = 6 * 0.0001;
 
 export const useChunks = create<Store>((set) => ({
   speedRef: { current: DEFAULT_SPEED },

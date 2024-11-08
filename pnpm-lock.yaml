@@ -17,6 +17,9 @@ dependencies:
   '@types/three':
     specifier: ^0.169.0
     version: 0.169.0
+  postprocessing:
+    specifier: ^6.36.4
+    version: 6.36.4(three@0.170.0)
   react:
     specifier: ^18.3.1
     version: 18.3.1

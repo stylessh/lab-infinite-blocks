@@ -6,14 +6,18 @@ interface BlockChunkProps {
   isLastChunk?: boolean;
 }
 
+// Define gap size between boxes
+const GAP = 0.04;
+
 /**
  * This is a chunk of blocks that are used to build the world.
  * blocks are 1x1x1 with subtle height variations between adjacent blocks
+ * and small gaps between them
  */
 export const BlockChunk = ({ isLastChunk = false }: BlockChunkProps) => {
   const heightMap = useMemo(() => {
     // Generate a height map first to ensure smooth transitions
-    const map = Array(CHUNK_SIZE)
+    const map: number[][] = Array(CHUNK_SIZE)
       .fill(0)
       .map(() => Array(CHUNK_SIZE).fill(0));
 
@@ -45,7 +49,11 @@ export const BlockChunk = ({ isLastChunk = false }: BlockChunkProps) => {
         row.map((height, z) => (
           <Box
             key={`instanced-${x}-${z}`}
-            position={[x, height, z]}
+            position={[
+              x * (1 + GAP), // Add gap to X position
+              height,
+              z * (1 + GAP * 2), // Add gap to Z position
+            ]}
             isWireframe={isLastChunk}
           />
         ))
