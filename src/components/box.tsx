@@ -2,23 +2,29 @@ import { useLayoutEffect, useRef } from "react";
 import * as THREE from "three";
 
 interface BoxProps {
-  position: [number, number, number];
-  isWireframe?: boolean;
+  positions: [number, number, number][];
 }
 
-const Box = ({ position }: BoxProps) => {
+const Box = ({ positions }: BoxProps) => {
   const ref = useRef<THREE.InstancedMesh>(null);
 
   useLayoutEffect(() => {
     if (!ref.current) return;
-    ref.current.setMatrixAt(0, new THREE.Matrix4());
-  }, [position]);
+
+    const matrix = new THREE.Matrix4();
+
+    positions.forEach((position, i) => {
+      matrix.setPosition(position[0], position[1], position[2]);
+      ref.current?.setMatrixAt(i, matrix);
+    });
+
+    ref.current.instanceMatrix.needsUpdate = true;
+  }, [positions]);
 
   return (
     <instancedMesh
       ref={ref}
-      position={position}
-      args={[undefined, undefined, 1]}
+      args={[undefined, undefined, positions.length]}
       castShadow
       receiveShadow
     >

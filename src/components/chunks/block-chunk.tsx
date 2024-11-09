@@ -2,10 +2,6 @@ import { useMemo } from "react";
 import { CHUNK_SIZE } from "./use-chunks";
 import Box from "../box";
 
-interface BlockChunkProps {
-  isLastChunk?: boolean;
-}
-
 // Define gap size between boxes
 const GAP = 0.04;
 
@@ -14,8 +10,8 @@ const GAP = 0.04;
  * blocks are 1x1x1 with subtle height variations between adjacent blocks
  * and small gaps between them
  */
-export const BlockChunk = ({ isLastChunk = false }: BlockChunkProps) => {
-  const heightMap = useMemo(() => {
+export const BlockChunk = () => {
+  const { positions } = useMemo(() => {
     // Generate a height map first to ensure smooth transitions
     const map: number[][] = Array(CHUNK_SIZE)
       .fill(0)
@@ -40,24 +36,20 @@ export const BlockChunk = ({ isLastChunk = false }: BlockChunkProps) => {
       }
     }
 
-    return map;
+    // Calculate all positions at once
+    const positions: [number, number, number][] = [];
+    for (let x = 0; x < CHUNK_SIZE; x++) {
+      for (let z = 0; z < CHUNK_SIZE; z++) {
+        positions.push([
+          x * (1 + GAP) - CHUNK_SIZE / 2,
+          map[x][z],
+          z * (1 + GAP * 2) - CHUNK_SIZE / 2,
+        ]);
+      }
+    }
+
+    return { positions };
   }, []);
 
-  return (
-    <group position={[-CHUNK_SIZE / 2, 0, -CHUNK_SIZE / 2]}>
-      {heightMap.map((row, x) =>
-        row.map((height, z) => (
-          <Box
-            key={`instanced-${x}-${z}`}
-            position={[
-              x * (1 + GAP), // Add gap to X position
-              height,
-              z * (1 + GAP * 2), // Add gap to Z position
-            ]}
-            isWireframe={isLastChunk}
-          />
-        ))
-      )}
-    </group>
-  );
+  return <Box positions={positions} />;
 };

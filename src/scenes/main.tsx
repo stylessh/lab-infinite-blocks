@@ -15,10 +15,10 @@ export const MainScene = () => {
       <ChunkManager />
 
       <EffectComposer enableNormalPass={false}>
-        <Noise opacity={0.02} />
+        <Noise opacity={0.025} />
         <Vignette eskil={false} offset={0.05} darkness={0.9} />
         <ToneMapping />
-        <Pixelation granularity={3.5} />
+        <Pixelation granularity={4} />
       </EffectComposer>
     </>
   );
