@@ -28,7 +28,7 @@ export const ChunkManager = () => {
   return (
     <group ref={groupRef}>
       {chunks.map((chunk, index) => (
-        <group key={chunk.id} position={[0, 0, -index * CHUNK_SIZE + 10]}>
+        <group key={chunk.id} position={[0, 0, -index * CHUNK_SIZE - 5]}>
           <chunk.Component id={chunk.id} />
         </group>
       ))}
