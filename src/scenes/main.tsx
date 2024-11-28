@@ -13,7 +13,7 @@ export const MainScene = () => {
     <>
       <Lights />
       <ChunkManager />
-      {process.env.NODE_ENV === "development" && <OrbitControls />}
+      {import.meta.env.DEV && <OrbitControls />}
       <EffectComposer enableNormalPass={false}>
         <Vignette eskil={false} offset={0.05} darkness={0.9} />
         <ToneMapping />
