@@ -11,7 +11,7 @@ function App() {
       shadows
       dpr={[1, 1.5]}
       gl={{ antialias: true }}
-      camera={{ position: [0, 8, 10], fov: 25 }}
+      camera={{ position: [0, 5, 10], fov: 20 }}
     >
       <MainScene />
     </Canvas>

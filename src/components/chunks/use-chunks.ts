@@ -2,11 +2,11 @@
 import { create } from "zustand";
 import { getNewChunk } from "./get-chunk";
 
-export const LINES = 4;
-export const lineWidth = 5;
+export const LINES = 2;
+export const lineWidth = 7;
 
 export const CHUNK_SIZE = LINES * lineWidth;
-export const TOTAL_CHUNKS = 3;
+export const TOTAL_CHUNKS = 2;
 
 export interface ChunnkProps {
   id: string;
