@@ -132,7 +132,7 @@ export const RenderTexture = ({
   }, [fbo.texture]);
 
   useEffect(() => {
-    if (onDepthTexture) {
+    if (onDepthTexture && fbo.depthTexture) {
       onDepthTexture(fbo.depthTexture);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

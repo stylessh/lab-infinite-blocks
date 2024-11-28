@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { RenderTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
+// import { RenderTexture } from "./render-texture";
 
 const MODEL_PATH = "/models/monitor.glb";
 useGLTF.preload(MODEL_PATH);
@@ -72,7 +73,7 @@ export const InstancedMonitor = ({ positions }: Props) => {
 
 // Example scene to render on screens
 const InnerScene = () => {
-  const boxRef = useRef<THREE.Mesh>();
+  const boxRef = useRef<THREE.Mesh>(null);
 
   useFrame(() => {
     if (boxRef.current?.rotation.x) boxRef.current.rotation.x += 0.1;
